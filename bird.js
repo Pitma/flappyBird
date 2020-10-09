@@ -1,4 +1,4 @@
-function  mutate(x) {
+function mutate(x) {
   if (random(1) < 0.1) {
     let offset = randomGaussian() * 0.5;
     let newx = x + offset;
@@ -27,7 +27,6 @@ class Bird {
       this.brain = new NeuralNetwork(5, 8, 2);
     }
   }
- 
 
   up() {
     if (this.velocity >= 0) {
@@ -62,7 +61,6 @@ class Bird {
       inputs[3] = map(this.y, 0, height, 0, 1);
       // bird's y velocity
       inputs[4] = map(this.velocity, -5, 5, 0, 1);
-      
 
       /*  let inputs = [];
        inputs[0] = this.y / height;

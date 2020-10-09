@@ -1,8 +1,8 @@
 function nextGeneration() {
-    console.log("Next Generation");
-    generation++;
-    tempSum = 0;
-    normalizeFitness(oldBirds);
+  console.log("Next Generation");
+  generation++;
+  tempSum = 0;
+  normalizeFitness(oldBirds);
   //calculateFitness();
 
   for (let i = 0; i < TOTAL; i++) {
@@ -15,11 +15,10 @@ function nextGeneration() {
 function calculateFitness() {
   let sum = 0;
   for (let bird of oldBirds) {
-      sum += bird.score;
-    
+    sum += bird.score;
   }
-  for(let bird of oldBirds){
-    bird.fitness = (bird.score / sum) ;
+  for (let bird of oldBirds) {
+    bird.fitness = bird.score / sum;
   }
 }
 function normalizeFitness(birds) {

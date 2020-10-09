@@ -1,5 +1,5 @@
 function Pipe() {
-  this.gap = random(150,200);//TODO Dynamisch machen
+  this.gap = random(150, 200); //TODO Dynamisch machen
   this.top = random(height / 2);
   this.bottom = this.top + this.gap;
   this.x = width;
@@ -16,15 +16,15 @@ function Pipe() {
         bird.x + bird.radius > this.x &&
         bird.x - bird.radius < this.x + this.w
       ) {
-          this.highLight = true;
+        this.highLight = true;
         return true;
       }
     }
   };
   this.show = function () {
     fill(255);
-    if (this.highLight){
-        fill(255,0,0);
+    if (this.highLight) {
+      fill(255, 0, 0);
     }
     rect(this.x, 0, this.w, this.top);
     rect(this.x, this.bottom, this.w, height);

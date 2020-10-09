@@ -1,4 +1,4 @@
-const TOTAL = 200;
+const TOTAL = 400;
 
 let birds = [];
 let oldBirds = [];
@@ -12,17 +12,18 @@ let generationText;
 let survivor;
 let highScore;
 let maxSum = 0;
-let tempSum =0;
+let tempSum = 0;
+
 function setup() {
   let canvas = createCanvas(500, 600);
   canvas.parent("canvascontainer");
 
   slider = createSlider(1, 100, 1);
-  generationText = select('#gen');
-  scoreMax = select('#ahs');
-  highScore = select('#hs');
-  survivor = select('#surviver');
-  survivor.html(TOTAL +" / "+ TOTAL);
+  generationText = select("#gen");
+  scoreMax = select("#ahs");
+  highScore = select("#hs");
+  survivor = select("#surviver");
+  survivor.html(TOTAL + " / " + TOTAL);
 
   for (let i = 0; i < TOTAL; i++) {
     birds[i] = new Bird();
@@ -68,10 +69,9 @@ function draw() {
         maxSum = bird.score;
         scoreMax.html(maxSum);
       }
-      if(tempSum< bird.score){
+      if (tempSum < bird.score) {
         tempSum = bird.score;
         highScore.html(tempSum);
-
       }
       //bird.show();
     }
