@@ -1,4 +1,4 @@
-const TOTAL = 1000;
+const TOTAL = 500;
 
 let birds = [];
 let oldBirds = [];
@@ -14,7 +14,7 @@ let highScore;
 let maxSum = 0;
 let tempSum =0;
 function setup() {
-  let canvas = createCanvas(700, 800);
+  let canvas = createCanvas(500, 600);
   canvas.parent("canvascontainer");
 
   slider = createSlider(1, 100, 1);

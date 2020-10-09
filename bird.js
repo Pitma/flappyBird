@@ -15,7 +15,7 @@ class Bird {
     }
   }
   mutate(x) {
-    if (random(1) < 0.1) {
+    if (random(1) < 0.2) {
       let offset = randomGaussian() * 0.5;
       let newx = x + offset;
       return newx;
