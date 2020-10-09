@@ -22,6 +22,7 @@ function setup() {
   scoreMax = select('#ahs');
   highScore = select('#hs');
   survivor = select('#surviver');
+  survivor.html(TOTAL +" / "+ TOTAL);
 
   for (let i = 0; i < TOTAL; i++) {
     birds[i] = new Bird();
@@ -42,7 +43,7 @@ function draw() {
       for (let j = birds.length - 1; j >= 0; j--) {
         if (pipes[i].hits(birds[j])) {
           oldBirds.push(birds.splice(j, 1)[0]);
-          survivor.html(birds.length);
+          survivor.html(birds.length + " / " + TOTAL);
         }
       }
 
@@ -78,6 +79,7 @@ function draw() {
       counter = 0;
       nextGeneration();
       generationText.html(generation);
+      survivor.html(TOTAL + " / " + TOTAL);
       pipes = [];
     }
   }
