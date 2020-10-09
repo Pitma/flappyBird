@@ -1,5 +1,7 @@
 function nextGeneration() {
     console.log("Next Generation");
+    generation++;
+    tempSum = 0;
   calculateFitness();
 
   for (let i = 0; i < TOTAL; i++) {
@@ -32,6 +34,6 @@ function pickOne() {
 
   let bird = oldBirds[index];
   let child = new Bird(bird.brain);
-  child.mutate(0.2);
+  child.mutate(0.1);
   return child;
 }
