@@ -1,5 +1,5 @@
 function Pipe() {
-  this.gap = 250; //random(100,185);//TODO Dynamisch machen
+  this.gap = random(150,200);//TODO Dynamisch machen
   this.top = random(height / 2);
   this.bottom = this.top + this.gap;
   this.x = width;
@@ -27,7 +27,7 @@ function Pipe() {
         fill(255,0,0);
     }
     rect(this.x, 0, this.w, this.top);
-    rect(this.x, this.top + this.gap, this.w, height);
+    rect(this.x, this.bottom, this.w, height);
   };
 
   this.update = function () {

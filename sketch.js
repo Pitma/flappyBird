@@ -1,4 +1,4 @@
-const TOTAL = 500;
+const TOTAL = 200;
 
 let birds = [];
 let oldBirds = [];

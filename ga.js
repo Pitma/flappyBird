@@ -2,7 +2,8 @@ function nextGeneration() {
     console.log("Next Generation");
     generation++;
     tempSum = 0;
-  calculateFitness();
+    normalizeFitness(oldBirds);
+  //calculateFitness();
 
   for (let i = 0; i < TOTAL; i++) {
     birds[i] = pickOne();
@@ -21,6 +22,23 @@ function calculateFitness() {
     bird.fitness = (bird.score / sum) ;
   }
 }
+function normalizeFitness(birds) {
+  // Make score exponentially better?
+  for (let i = 0; i < birds.length; i++) {
+    birds[i].score = pow(birds[i].score, 4);
+  }
+
+  // Add up all the scores
+  let sum = 0;
+  for (let i = 0; i < birds.length; i++) {
+    sum += birds[i].score;
+  }
+  // Divide by the sum
+  for (let i = 0; i < birds.length; i++) {
+    birds[i].fitness = birds[i].score / sum;
+    //console.log(birds[i].fitness);
+  }
+}
 
 function pickOne() {
   var index = 0;
@@ -34,6 +52,6 @@ function pickOne() {
 
   let bird = oldBirds[index];
   let child = new Bird(bird.brain);
-  child.mutate(0.1);
+  //child.mutate(0.2);
   return child;
 }

@@ -1,33 +1,38 @@
+function  mutate(x) {
+  if (random(1) < 0.1) {
+    let offset = randomGaussian() * 0.5;
+    let newx = x + offset;
+    return newx;
+  } else {
+    return x;
+  }
+}
+
 class Bird {
   constructor(brain) {
     this.y = height / 2;
     this.x = 64;
     this.radius = 16;
-    this.gravity = 0.5;
+    this.gravity = 0.8;
+    this.lift = -12;
     this.velocity = 0;
     this.score = 0;
     this.fitness = 0;
 
     if (brain) {
       this.brain = brain.copy();
+      this.brain.mutate(mutate);
+      //console.log(this.brain);
     } else {
-      this.brain = new NeuralNetwork(4, 8, 2);
+      this.brain = new NeuralNetwork(5, 8, 2);
     }
   }
-  mutate(x) {
-    if (random(1) < 0.2) {
-      let offset = randomGaussian() * 0.5;
-      let newx = x + offset;
-      return newx;
-    } else {
-      return x;
-    }
-  }
+ 
 
   up() {
     if (this.velocity >= 0) {
       this.velocity = 0;
-      this.velocity -= this.gravity * 15;
+      this.velocity += this.lift;
     }
   }
 
@@ -44,17 +49,33 @@ class Bird {
       }
     }
 
-    let inputs = [];
-    inputs[0] = this.y / height;
-    inputs[1] = closest.top / height;
-    inputs[2] = (closest.top + closest.gap) / height;
-    inputs[3] = closest.x / width;
-    //inputs[4] = this.velocity / 30;
-    //inputs[4] = map(this.velocity, -5, 5, 0, 1);;
+    if (closest != null) {
+      // Now create the inputs to the neural network
+      let inputs = [];
+      // x position of closest pipe
+      inputs[0] = map(closest.x, this.x, width, 0, 1);
+      // top of closest pipe opening
+      inputs[1] = map(closest.top, 0, height, 0, 1);
+      // bottom of closest pipe opening
+      inputs[2] = map(closest.bottom, 0, height, 0, 1);
+      // bird's y position
+      inputs[3] = map(this.y, 0, height, 0, 1);
+      // bird's y velocity
+      inputs[4] = map(this.velocity, -5, 5, 0, 1);
+      
 
-    let output = this.brain.predict(inputs);
-    if (output[0] > output[1]) {
-      this.up();
+      /*  let inputs = [];
+       inputs[0] = this.y / height;
+       inputs[1] = closest.top / height;
+       inputs[2] = (closest.top + closest.gap) / height;
+       inputs[3] = closest.x / width; */
+      //inputs[4] = this.velocity / 30;
+      //inputs[4] = map(this.velocity, -5, 5, 0, 1);;
+
+      let output = this.brain.predict(inputs);
+      if (output[0] > output[1]) {
+        this.up();
+      }
     }
   }
 
